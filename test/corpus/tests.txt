@@ -1,0 +1,109 @@
+==================================
+Single Tag
+===================================
+<div>Hello</div>
+---
+
+(document
+  (element
+    (start_tag (tag_name))
+    (word)
+    (end_tag (tag_name))))
+
+==================================
+Single Nested Tag
+===================================
+<div>
+    <div>
+        Hello
+    </div>
+</div>
+---
+
+(document
+    (element
+        (start_tag (tag_name))
+            (element
+                (start_tag (tag_name))
+                    (word)
+                (end_tag (tag_name))
+            )
+        (end_tag (tag_name))
+    )
+)
+
+==================================
+Single With Two Words
+===================================
+<div>Hello World</div>
+---
+
+(document
+  (element
+    (start_tag (tag_name))
+    (word)(word)
+    (end_tag (tag_name))))
+
+==================================
+Blazor Page Route
+===================================
+@page "/counter"
+---
+
+(document (route_declaration (route)))
+
+==================================
+Blazor Simple Element with Variable
+===================================
+<p>@currentCount</p>
+---
+
+(document
+    (element
+    (start_tag (tag_name))
+        (interpolated_expression (identifier))
+    (end_tag (tag_name))
+    )
+)
+
+==================================
+Blazor Counter Example
+===================================
+@page "/counter"
+
+<PageTitle>Counter</PageTitle>
+
+<h1>Counter</h1>
+
+<p role="status">Current count: @currentCount</p>
+
+<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+
+@code {
+    private int currentCount = 0;
+
+    private void IncrementCount()
+    {
+        currentCount++;
+    }
+}
+---
+
+(document
+    (route_declaration (route))
+    (element
+        (start_tag (tag_name))
+            (word)
+        (end_tag (tag_name))
+    )
+    (element
+        (start_tag (tag_name))
+            (word)
+        (end_tag (tag_name))
+    )
+    (element
+        (start_tag (tag_name) (attribute (word)(string)))
+            (word)
+        (end_tag (tag_name))
+    )
+)
